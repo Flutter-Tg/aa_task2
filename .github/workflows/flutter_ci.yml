@@ -6,9 +6,9 @@ on:
   # Runs when we have created
   # a pull request...
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
