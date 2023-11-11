@@ -1,0 +1,30 @@
+# Specify name of the action
+name: Flutter CI
+
+# When it should run
+on:
+  # Runs when we have created
+  # a pull request...
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    - run: flutter pub get
+    - run: flutter build apk
+    - uses: actions/upload-artifact@v3
+      with:
+        name: release-apk
+        path: build/app/outputs/apk/release/app-release.apk
